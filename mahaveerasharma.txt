@@ -1,0 +1,102 @@
+
+# Problem 1: String alphabet analysis
+
+import string
+
+# (1) Introduce a string of exactly 300 characters
+text = """In 2025, a group of 12 researchers travelled to an ancient village.
+They discovered 7 old buildings, 34 clay pots and 19 stone tools.
+The team spent 6 days examining the site and recording every discovery.
+Their work helped explain how people lived, traded and worked together.
+The researchers also found maps, coins and letters hidden beneath the ground.
+After 3 weeks, they returned home with 25 boxes of carefully collected objects.
+The discovery attracted attention from historians around the world."""
+
+# Adjust the string to exactly 300 characters if necessary
+text = text[:300]
+
+print("Original text:")
+print(text)
+print("=" * 60)
+
+print("1.1: Number of characters:", len(text))
+print("1.1: Number of words:", len(text.split()))
+
+# (2) Reverse, replace b with X, and convert to lowercase
+changed_text = text[::-1].replace("b", "X").lower()
+
+print("\n1.2: Reversed and modified text:")
+print(changed_text)
+
+# (3) Count the letter a
+print("\n1.3: Letter frequency")
+print("The letter 'a' appears {} times.".format(text.lower().count("a")))
+
+alphabet = string.ascii_lowercase
+missing_letters = []
+
+for letter in alphabet:
+    frequency = text.lower().count(letter)
+    print("The letter '{}' appears {} times.".format(letter, frequency))
+
+    if frequency == 0:
+        missing_letters.append(letter)
+
+print("\nLetters missing from the text:")
+print(missing_letters)
+
+# (4) Remove digits 0 through 8 and replace 9 with nine
+new_text = ""
+
+for character in text:
+    if character == "9":
+        new_text += "nine"
+    elif character not in "012345678":
+        new_text += character
+
+print("\n1.4: Text after changing the digits:")
+print(new_text)
+
+Q2
+
+
+import random
+
+# Introduce a sentence containing 10 different words
+sentence = "Birds fly across green fields during warm summer mornings bright"
+
+words = sentence.split()
+
+print("Original sentence:")
+print(sentence)
+
+# 2.1: Create a dictionary using each word's index
+word_dictionary = {}
+
+for position in range(len(words)):
+    word_dictionary[position] = words[position]
+
+print("\n2.1: Dictionary of indexed words:")
+print(word_dictionary)
+
+# 2.2: Generate a new sentence using 20 random keys
+new_sentence = ""
+
+for number in range(20):
+    key = random.randint(0, 9)
+    new_sentence += word_dictionary[key] + " "
+
+print("\n2.2: New randomly generated sentence:")
+print(new_sentence)
+
+# 2.3: Count each word and stop at the first missing word
+print("\n2.3: Checking the words:")
+
+for word in word_dictionary.values():
+    word_count = new_sentence.split().count(word)
+
+    if word_count == 0:
+        print("'{}' is missing in s_new".format(word))
+        break
+
+    print("'{}' appears {} times in s_new".format(word, word_count))
